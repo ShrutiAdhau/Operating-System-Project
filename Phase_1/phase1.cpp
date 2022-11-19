@@ -16,7 +16,7 @@ public:
 
 
     VM(){
-        newfile.open("cp.txt", ios::in); 
+        newfile.open("input_1.txt", ios::in); 
         assign_all();
     }
 
@@ -290,7 +290,7 @@ public:
     
     void write(){
         cout<<"Write func called\n";
-        op.open("output.txt", std::fstream::app);
+        op.open("Output_1.txt", std::fstream::app);
         
         IR[3] = '0';
         for (int i = (IR[2] - '0')*10; i < (IR[2] - '0' + 1)*10; i++){
@@ -307,7 +307,7 @@ public:
 
     void halt(){
         IC = 100;
-        op.open("output.txt", std::fstream::app);
+        op.open("Output_1.txt", std::fstream::app);
         cout<<"halt called\n\n";
         op<<"\n\n";
         op.close();
