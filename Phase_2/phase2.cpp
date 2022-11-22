@@ -10,9 +10,8 @@ public:
     int TTL;
     int jobID;
     int TLL;
-    int TTC = 0;
-    int LLC = 0;
-
+    int TTC;
+    int LLC;
 };
 
 class VM{
@@ -270,13 +269,6 @@ public:
         int ra = real_address(IC);
         while(IC<99 && Memory[ra][0]!='@'){
 
-            cout<<"\nTTC: "<<pcb.TTC<<"\n";
-            if(pcb.TTC>pcb.TTL){
-                TI = 2;
-                cout<<"\nCalling mastermode : Time Limit Exceeded\n";
-                masterMode();
-            }
-
             for(int i=0;i<4;i++){
                 IR[i] = Memory[ra][i];
             }
@@ -390,8 +382,8 @@ public:
                 cout<<"\nCalling mastermode : opcode error\n";
                 masterMode();
             }
-            cout<<"\nTTC: "<<pcb.TTC;
-            if(pcb.TTC>pcb.TTL){
+            cout<<"\nTTC: "<<pcb.TTC<<"\n";
+            if(pcb.TTC>=pcb.TTL && IR[0]!='H'){
                 TI = 2;
                 cout<<"\nCalling mastermode : Time Limit Exceeded\n";
                 masterMode();
@@ -606,7 +598,10 @@ public:
             op<<"\n\n";
             break;
         }
-        
+        op<<"SI: "<<SI<<" PI: "<<PI<<" TI: "<<TI<<"\n";
+        op<<"PTR: "<<PTR<<" TTC: "<<pcb.TTC<<" LLC: "<<pcb.LLC<<"\n";
+        op<<"TLL: "<<pcb.TLL<<" TTL: "<<pcb.TTL<<" JobID: "<<pcb.jobID<<"\n\n\n";
+
         op.close();
 
     }
